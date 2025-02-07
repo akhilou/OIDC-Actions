@@ -1,26 +1,28 @@
-name: Check AWS Access
+name: Deploy to AWS
 
 on:
-  push :
+  push:
     branches:
       - main
 
-
 jobs:
-  check-access:
+  deploy:
     runs-on: self-hosted
     permissions:
       id-token: write
       contents: read
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        role-to-assume: arn:aws:iam::559050225197:role/actions-role
-        role-session-name: githubactions-role
-        aws-region: "us-east-1"
-    - name: Verify AWS credentials
-      run: aws sts get-caller-identity
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Authenticate to AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::559050225197:role/actions-role
+          aws-region: us-east-1
+
+      - name: Create a file
+        run: |
+          echo "This is the content of the file" > myfile.txt
+          echo "File created successfully!"
