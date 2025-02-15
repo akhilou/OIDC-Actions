@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "myaws-bucket-terraform-state-file"
-    key    = "terraform-state-file/statefile/"
+    key    = "terraform-state-file/statefile"
     region = "var.region"
   }
 }
