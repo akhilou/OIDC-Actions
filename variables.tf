@@ -8,7 +8,17 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "subnet_cidrs" {
+  description = "List of CIDR blocks for the subnets"
+  type        = list(string)
+}
+
 variable "vpc_name" {
   description = "The name of the VPC"
+  type        = string
+}
+
+variable "alb_name" {
+  description = "The name of the ALB"
   type        = string
 }
